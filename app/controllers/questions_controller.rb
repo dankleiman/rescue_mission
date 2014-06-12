@@ -3,4 +3,8 @@ class QuestionsController < ApplicationController
     @questions = Question.order('created_at DESC')
   end
 
+  def new
+    @question = Question.new
+  end
+
 end
