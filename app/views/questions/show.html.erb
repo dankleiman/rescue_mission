@@ -2,9 +2,9 @@
 
 <p><%= @question.description %></p>
 
+<%= link_to "Edit Question", "/questions/#{@question.id}/edit" %>
+
 <h4>Add an Answer</h4>
-
-
 
 <%= form_for [@question, @answer] do |f| %>
 
