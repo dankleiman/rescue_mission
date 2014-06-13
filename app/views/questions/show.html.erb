@@ -2,7 +2,9 @@
 
 <p><%= @question.description %></p>
 
-<%= link_to "Edit Question", "/questions/#{@question.id}/edit" %>
+<p><%= link_to "Delete Question", @question, method: :delete %></p>
+
+<p><%= link_to "Edit Question", "/questions/#{@question.id}/edit" %></p>
 
 <h4>Add an Answer</h4>
 

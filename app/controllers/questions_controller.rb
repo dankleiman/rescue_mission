@@ -33,7 +33,15 @@ class QuestionsController < ApplicationController
     else
       render :edit
     end
+  end
 
+  def destroy
+    @question = Question.find(params[:id])
+    @question.answers.each do |answer|
+      answer.destroy
+    end
+    @question.destroy
+    redirect_to action: :index
   end
 
   private
