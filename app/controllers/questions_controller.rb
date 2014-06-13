@@ -36,11 +36,11 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    @question = Question.find(params[:id])
-    @question.answers.each do |answer|
+    question = Question.find(params[:id])
+    question.answers.each do |answer|
       answer.destroy
     end
-    @question.destroy
+    question.destroy
     redirect_to action: :index
   end
 
