@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  before_filter :authorize, except: :create
+
   def create
     @question = Question.find(params[:question_id])
     @answer = Answer.new(answer_params)
@@ -12,9 +14,7 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if !current_user
-      flash[:notice] = "Sign in to choose an answer."
-    elsif current_user.id == Question.find(params[:question_id]).author.to_i
+    if current_user.id == Question.find(params[:question_id]).author.to_i
       answer = Answer.where(best_answer: true).first
       if answer
         answer.best_answer = false
