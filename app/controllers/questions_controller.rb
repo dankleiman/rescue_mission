@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
     params[:question][:author] = session[:user_id]
     @question = Question.new(question_params)
     if !current_user
-      flash.now[:notice] = "Please sign in to ask a question."
+      flash[:notice] = "Please sign in to ask a question."
       render :new
     elsif @question.save
       redirect_to "/questions/#{@question.id}"
