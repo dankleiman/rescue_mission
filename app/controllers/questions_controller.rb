@@ -49,12 +49,10 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    authorize
-
 
     question = Question.find(params[:id])
 
-    if current_user.id == @question.author.to_i
+    if current_user.id == question.author.to_i
       question.answers.each do |answer|
         answer.destroy
       end
@@ -62,7 +60,7 @@ class QuestionsController < ApplicationController
       redirect_to action: :index
     else
       flash[:notice] = "You are not allowed to delete this question."
-      redirect_to "/questions/#{@question.id}"
+      redirect_to "/questions/#{question.id}"
     end
   end
 
