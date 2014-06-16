@@ -10,7 +10,10 @@ class QuestionsController < ApplicationController
   def create
     params[:question][:author] = session[:user_id]
     @question = Question.new(question_params)
-    if @question.save
+    if !current_user
+      flash.now[:notice] = "Please sign in to ask a question."
+      render :new
+    elsif @question.save
       redirect_to "/questions/#{@question.id}"
     else
       flash.now[:notice] = "Could not save your question."
@@ -25,6 +28,14 @@ class QuestionsController < ApplicationController
 
   def edit
     @question = Question.find(params[:id])
+    if !current_user
+      flash[:notice] = "Please sign in to edit questions."
+      redirect_to "/questions/#{@question.id}"
+    elsif current_user.id != @question.author.to_i
+      flash[:notice] = "You are not allowed to edit this question."
+      redirect_to "/questions/#{@question.id}"
+    end
+
   end
 
   def update
