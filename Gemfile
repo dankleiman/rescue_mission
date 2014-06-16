@@ -28,6 +28,8 @@ gem 'spring',        group: :development
 
 gem 'redcarpet', '~> 3.0.0'
 
+gem 'omniauth-facebook'
+
 group :test, :development do
   gem 'pry-rails'
 end
