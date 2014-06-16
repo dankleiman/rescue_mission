@@ -28,10 +28,12 @@ gem 'spring',        group: :development
 
 gem 'redcarpet', '~> 3.0.0'
 
+gem 'omniauth'
 gem 'omniauth-facebook'
 
 group :test, :development do
   gem 'pry-rails'
+  gem 'dotenv-rails'
 end
 
 # Use ActiveModel has_secure_password

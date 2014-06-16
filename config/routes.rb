@@ -2,6 +2,12 @@ Rails.application.routes.draw do
   resources :questions do
     resources :answers, only: [:create, :destroy, :update]
   end
+
+  root to: "questions#index"
+
+  match 'auth/facebook/callback', to: 'sessions#create', via: [:get, :post]
+  match 'auth/failure', to: redirect('/questions'), via: [:get, :post]
+  match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
