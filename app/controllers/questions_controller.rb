@@ -8,6 +8,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    params[:question][:author] = session[:user_id]
     @question = Question.new(question_params)
     if @question.save
       redirect_to "/questions/#{@question.id}"
@@ -47,7 +48,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :description)
+    params.require(:question).permit(:title, :description, :author)
   end
 
 end
